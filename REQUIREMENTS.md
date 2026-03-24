@@ -137,30 +137,99 @@ NemoClaw (NeMo Guardrails layer) shores up OpenClaw:
 
 ## Architecture Overview
 
+OpenClaw is the full OS layer — it simultaneously acts as **message proxy**, **agent coordinator**, and **workflow engine**. All conversation traffic flows through it.
+
 ```
-┌─────────────────────────────────────────────────────┐
-│                  AI BOARD ROOM                       │
-│         (Web Dashboard + CLI + VS Code Ext)          │
-└─────────────────┬───────────────────────────────────┘
-                  │
-┌─────────────────▼───────────────────────────────────┐
-│              OPENCLAW PLATFORM                       │
-│         (Local agent OS — your machine)              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │
-│  │   Claude    │  │  Copilot    │  │  [Future]   │ │
-│  │  Connector  │  │  Connector  │  │  Connector  │ │
-│  └─────────────┘  └─────────────┘  └─────────────┘ │
-└─────────────────┬───────────────────────────────────┘
-                  │
-┌─────────────────▼───────────────────────────────────┐
-│              NEMOCLAW LAYER                          │
-│    (Guardrails, identity validation, anomaly flags)  │
-└─────────────────┬───────────────────────────────────┘
-                  │
-┌─────────────────▼───────────────────────────────────┐
-│         SOVEREIGN STORAGE (dev laptop → ST-GABRIEL)  │
-│     PostgreSQL      │     Qdrant      │  MD Files   │
-└─────────────────────────────────────────────────────┘
+  USER
+   │
+   ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    AI BOARD ROOM INTERFACES                      │
+│         Web Dashboard  │  VS Code Extension  │  CLI Tool        │
+│         (observe)      │  (capture trigger)  │  (import/export) │
+└────────────────────────────────┬────────────────────────────────┘
+                                 │ commands / events
+                                 ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     OPENCLAW  (local AI OS)                      │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  ROLE 1 — MESSAGE PROXY                                  │   │
+│  │  All conversation traffic routes through OpenClaw.       │   │
+│  │  Every turn is intercepted, timestamped, and tagged      │   │
+│  │  with a Thread ID before reaching the AI platform.       │   │
+│  └──────────────────────┬──────────────────────────────────┘   │
+│                          │                                       │
+│  ┌───────────────────────▼──────────────────────────────────┐  │
+│  │  ROLE 2 — AGENT COORDINATOR                               │  │
+│  │  Routes to the correct AI platform via pluggable          │  │
+│  │  Connectors. Manages multi-agent workflows (e.g.,         │  │
+│  │  synthesis sessions across named instances).              │  │
+│  │                                                           │  │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │  │
+│  │  │   Claude /   │  │  VS Code     │  │  [Future     │   │  │
+│  │  │ Claude Code  │  │  Copilot     │  │  Connector]  │   │  │
+│  │  │  Connector   │  │  Connector   │  │              │   │  │
+│  │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘   │  │
+│  └─────────┼────────────────┼────────────────────┼──────────┘  │
+│            │   (responses)  │                    │              │
+│  ┌─────────▼────────────────▼────────────────────▼──────────┐  │
+│  │  ROLE 3 — WORKFLOW ENGINE                                 │  │
+│  │  On every conversation event, OpenClaw runs:             │  │
+│  │    1. Capture turn (text + metadata)                      │  │
+│  │    2. Assign / confirm Thread ID                          │  │
+│  │    3. Pass to NemoClaw for validation                     │  │
+│  │    4. Store to sovereign storage                          │  │
+│  │    5. Evaluate checkpoint rule (trigger if due)           │  │
+│  │    6. Emit event to AI Board Room dashboard               │  │
+│  └──────────────────────────┬────────────────────────────────┘  │
+└─────────────────────────────┼───────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       NEMOCLAW LAYER                             │
+│   Validates identity consistency │ Flags obfuscation events     │
+│   Enforces checkpoint quality    │ Guardrails on ingestion       │
+└──────────────────────────────┬──────────────────────────────────┘
+                               │
+                               ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              SOVEREIGN STORAGE  (dev laptop → ST-GABRIEL)        │
+│      PostgreSQL          │      Qdrant          │   MD Files    │
+│  (threads, checkpoints,  │  (semantic search    │  (handoff     │
+│   provenance records)    │   across threads)    │   exports)    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### OpenClaw Orchestration Flow (per conversation turn)
+
+```
+User sends message
+       │
+       ▼
+OpenClaw intercepts (Proxy)
+       │
+       ├──► Tag with Thread ID
+       ├──► Record timestamp + metadata
+       │
+       ▼
+Route to AI Platform (Coordinator)
+       │
+       ▼
+AI Platform responds
+       │
+       ▼
+OpenClaw intercepts response (Proxy)
+       │
+       ▼
+Workflow Engine pipeline:
+  [1] Capture turn → [2] NemoClaw validate → [3] Store
+       │
+       ├──► Checkpoint due? → Trigger Formation Checkpoint
+       └──► Emit event → AI Board Room Dashboard
+       │
+       ▼
+Response delivered to User
 ```
 
 ---
