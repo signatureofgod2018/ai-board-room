@@ -1,0 +1,53 @@
+{
+  "name": "boardroom-vscode",
+  "displayName": "AI Board Room",
+  "description": "Track and preserve AI thread identity inside VS Code",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "boardroom",
+          "title": "AI Board Room",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "boardroom": [
+        {
+          "id": "boardroom.sessions",
+          "name": "Tracked Sessions"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "boardroom.startCapture",
+        "title": "Board Room: Start Capturing Session"
+      },
+      {
+        "command": "boardroom.recordCheckpoint",
+        "title": "Board Room: Record Formation Checkpoint"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@boardroom/core": "*",
+    "@boardroom/openclaw": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/vscode": "^1.85.0"
+  }
+}

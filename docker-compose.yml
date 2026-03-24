@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: boardroom-postgres
+    environment:
+      POSTGRES_USER: boardroom
+      POSTGRES_PASSWORD: boardroom
+      POSTGRES_DB: boardroom
+    ports:
+      - "5432:5432"
+    volumes:
+      - boardroom-postgres-data:/var/lib/postgresql/data
+      - ./packages/storage/migrations:/docker-entrypoint-initdb.d
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: boardroom-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - boardroom-qdrant-data:/qdrant/storage
+
+volumes:
+  boardroom-postgres-data:
+  boardroom-qdrant-data:

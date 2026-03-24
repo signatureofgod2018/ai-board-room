@@ -1,0 +1,21 @@
+{
+  "name": "@boardroom/storage",
+  "version": "0.1.0",
+  "description": "Sovereign storage layer — PostgreSQL, Qdrant, Markdown exports",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@boardroom/core": "*",
+    "pg": "^8.11.0",
+    "@qdrant/js-client-rest": "^1.9.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/pg": "^8.11.0"
+  }
+}

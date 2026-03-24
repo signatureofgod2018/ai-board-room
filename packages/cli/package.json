@@ -1,0 +1,22 @@
+{
+  "name": "@boardroom/cli",
+  "version": "0.1.0",
+  "description": "boardroom CLI — capture, import, checkpoint, export, list, search",
+  "type": "module",
+  "bin": {
+    "boardroom": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@boardroom/core": "*",
+    "@boardroom/openclaw": "*",
+    "@boardroom/storage": "*",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
