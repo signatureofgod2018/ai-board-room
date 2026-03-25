@@ -127,6 +127,7 @@ OpenClaw is the full OS layer: it proxies messages, coordinates agents, AND runs
 | `docker-compose.yml` | Local dev storage (PostgreSQL + Qdrant) |
 | `.env.example` | All required environment variables |
 | `ai-workspace/handoff.md` | This file — update it as work progresses |
+| `docs/ARCHITECTURE.md` | Full architecture: tech stack, data flows, 14 use cases, 7 Mermaid sequence diagrams |
 
 ---
 
