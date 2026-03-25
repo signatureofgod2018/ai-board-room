@@ -210,6 +210,7 @@ Dev Qdrant snapshot   → SCP → ST-GABRIEL Qdrant restore
 ```mermaid
 sequenceDiagram
     actor User
+    participant UI as AI Board Room<br/>Interface<br/>(Dashboard / VS Code / CLI)
     participant Proxy as OpenClaw<br/>MessageProxy
     participant Coord as AgentCoordinator
     participant Conn as Connector<br/>(Claude / Copilot)
@@ -220,7 +221,14 @@ sequenceDiagram
     participant QD as Qdrant
     participant DB as Dashboard
 
-    User->>Proxy: sends message
+    User->>UI: opens session<br/>(names instance, selects platform)
+    UI->>Proxy: open(platform, options)
+    Proxy->>Proxy: assign Thread ID<br/>initialize session metadata
+
+    Note over UI,Proxy: Proxy is now open — all traffic<br/>flows through it for this session
+
+    User->>UI: sends message
+    UI->>Proxy: forwardOutbound(turn)
     Proxy->>Proxy: tag outbound turn<br/>(Thread ID, timestamp, metadata)
     Proxy->>Coord: route(platform)
     Coord->>Conn: forward message
@@ -245,8 +253,9 @@ sequenceDiagram
     end
 
     WF->>DB: emit TurnCapturedEvent
-    DB-->>User: real-time update
-    Proxy-->>User: AI response delivered
+    DB-->>UI: real-time session update
+    Proxy-->>UI: AI response
+    UI-->>User: response displayed
 ```
 
 ---
