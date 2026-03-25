@@ -1,7 +1,7 @@
 # AI Board Room — AI Workspace Handoff
 **Project:** AI Board Room (Chat Tracker)
 **Repo:** https://github.com/signatureofgod2018/ai-board-room
-**Last Updated:** 2026-03-24 18:45 CST
+**Last Updated:** 2026-03-24 19:14 CST
 **Updated By:** Oscar-Romero-CC (Claude Sonnet 4.6 — Claude Code instance)
 
 ---
@@ -75,7 +75,8 @@ OpenClaw is the full OS layer: it proxies messages, coordinates agents, AND runs
 
 | # | Item | Owner | Notes |
 |---|---|---|---|
-| 20 | ST-GABRIEL Linux VM install | Bill | ST-GABRIEL is behind a second router (double NAT). Must install Linux VM first, then Tailscale on both laptop + ST-GABRIEL to bridge the networks. Laptop is on `192.168.4.119`, public IP `89.238.174.24`. Deferred to 2026-03-25. |
+| 20 | Dev environment setup | Bill | Two blockers before any local code can run — see **Dev Environment Checklist** below |
+| 21 | ST-GABRIEL Linux VM install | Bill | ST-GABRIEL is behind double NAT (second router). Install Linux VM → Tailscale on both machines → grab `100.x.x.x` IP → set `ST_GABRIEL_HOST` in deploy script. Laptop: `192.168.4.119`, public IP: `89.238.174.24`. Deferred to 2026-03-25. |
 
 ---
 
@@ -126,6 +127,43 @@ OpenClaw is the full OS layer: it proxies messages, coordinates agents, AND runs
 | `docker-compose.yml` | Local dev storage (PostgreSQL + Qdrant) |
 | `.env.example` | All required environment variables |
 | `ai-workspace/handoff.md` | This file — update it as work progresses |
+
+---
+
+---
+
+## Dev Environment Checklist (Must Complete Before Running Anything Locally)
+
+Complete these before the next coding session. Both are blocking.
+
+### 1. Upgrade Node.js → v20 (currently v14.15.5 — too old)
+- Download LTS installer from https://nodejs.org/en/download
+- Install, restart terminal, verify: `node --version` → should show `v20.x` or `v22.x`
+- npm workspaces require npm 7+ (comes bundled with Node 20)
+
+### 2. Start Docker Desktop
+- Docker Desktop is installed at `C:\Program Files\Docker\Docker\`
+- Launch from Start menu → wait for the whale icon to stabilize in the taskbar
+- Verify: open a new terminal and run `docker --version`
+
+### Once both are done — first commands to run:
+```bash
+cd C:\Users\bvict\projects\source_of_truth
+
+# Install all workspace dependencies
+npm install
+
+# Start local storage (PostgreSQL + Qdrant)
+docker compose up -d
+
+# Verify containers are healthy
+docker compose ps
+
+# Build all packages
+npm run build
+```
+
+Then pick up at **QUEUE item #13** — PostgreSQL storage implementation.
 
 ---
 
