@@ -75,7 +75,7 @@ OpenClaw is the full OS layer: it proxies messages, coordinates agents, AND runs
 
 | # | Item | Owner | Notes |
 |---|---|---|---|
-| — | — | — | — |
+| 20 | ST-GABRIEL Linux VM install | Bill | ST-GABRIEL is behind a second router (double NAT). Must install Linux VM first, then Tailscale on both laptop + ST-GABRIEL to bridge the networks. Laptop is on `192.168.4.119`, public IP `89.238.174.24`. Deferred to 2026-03-25. |
 
 ---
 
@@ -104,7 +104,7 @@ OpenClaw is the full OS layer: it proxies messages, coordinates agents, AND runs
 
 | # | Item | Notes |
 |---|---|---|
-| B1 | ST-GABRIEL deployment | Docker Compose → production deploy on ST-GABRIEL server |
+| B1 | ST-GABRIEL deployment | **Blocked on Linux VM install (2026-03-25).** Steps: (1) Install Linux VM on ST-GABRIEL, (2) Install Tailscale on ST-GABRIEL + laptop, (3) Get ST-GABRIEL Tailscale IP (100.x.x.x), (4) Set ST_GABRIEL_HOST in deploy script, (5) Run `./scripts/deploy.sh` |
 | B2 | Cross-instance (synthesis) view | Dashboard view showing relationships between named instances (Matilda-style synthesis) |
 | B3 | Additional connectors | WhatsApp, Telegram, Discord, Slack — leverage OpenClaw's existing platform support |
 | B4 | Obfuscation event alerting | Real-time alerts when NemoClaw detects platform obfuscation events (context compaction, session drift) |
