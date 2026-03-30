@@ -20,31 +20,31 @@ describe("T0 — Docker Platform", () => {
     expect(output).toBeTruthy();
   });
 
-  it("boardroom-postgres container is running", () => {
+  it("basilica-postgres container is running", () => {
     const status = dockerExec(
-      "docker inspect --format='{{.State.Status}}' boardroom-postgres 2>/dev/null || echo 'not found'"
+      "docker inspect --format='{{.State.Status}}' basilica-postgres 2>/dev/null || echo 'not found'"
     );
-    expect(status, "boardroom-postgres not running — run: docker compose up -d").toBe("running");
+    expect(status, "basilica-postgres not running — run: docker compose up -d").toBe("running");
   });
 
-  it("boardroom-postgres container is healthy", () => {
+  it("basilica-postgres container is healthy", () => {
     const health = dockerExec(
-      "docker inspect --format='{{.State.Health.Status}}' boardroom-postgres 2>/dev/null || echo 'unknown'"
+      "docker inspect --format='{{.State.Health.Status}}' basilica-postgres 2>/dev/null || echo 'unknown'"
     );
-    expect(health, "boardroom-postgres unhealthy").toBe("healthy");
+    expect(health, "basilica-postgres unhealthy").toBe("healthy");
   });
 
-  it("boardroom-qdrant container is running", () => {
+  it("basilica-qdrant container is running", () => {
     const status = dockerExec(
-      "docker inspect --format='{{.State.Status}}' boardroom-qdrant 2>/dev/null || echo 'not found'"
+      "docker inspect --format='{{.State.Status}}' basilica-qdrant 2>/dev/null || echo 'not found'"
     );
-    expect(status, "boardroom-qdrant not running — run: docker compose up -d").toBe("running");
+    expect(status, "basilica-qdrant not running — run: docker compose up -d").toBe("running");
   });
 
-  it("boardroom-qdrant container is healthy", () => {
+  it("basilica-qdrant container is healthy", () => {
     const health = dockerExec(
-      "docker inspect --format='{{.State.Health.Status}}' boardroom-qdrant 2>/dev/null || echo 'unknown'"
+      "docker inspect --format='{{.State.Health.Status}}' basilica-qdrant 2>/dev/null || echo 'unknown'"
     );
-    expect(health, "boardroom-qdrant unhealthy").toBe("healthy");
+    expect(health, "basilica-qdrant unhealthy").toBe("healthy");
   });
 });

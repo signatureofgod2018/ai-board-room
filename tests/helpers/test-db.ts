@@ -1,12 +1,12 @@
 /**
  * Test database helpers — spin up and tear down a clean test schema.
- * Uses the `boardroom_test` database (separate from dev/prod).
+ * Uses the `basilica_test` database (separate from dev/prod).
  */
 import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
 
 const TEST_DB_URL = process.env["POSTGRES_TEST_URL"] ??
-  "postgresql://boardroom:boardroom@localhost:5432/boardroom_test";
+  "postgresql://basilica:basilica@localhost:5432/basilica_test";
 
 const MIGRATIONS_DIR = join(process.cwd(), "packages/storage/migrations");
 

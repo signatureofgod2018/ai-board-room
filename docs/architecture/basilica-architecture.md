@@ -1,4 +1,4 @@
-# AI Board Room — Architecture Document
+# Orchestration OS — proxy, coordinator, workflow — Architecture Document
 
 **Version:** 0.1
 **Date:** 2026-03-24
@@ -25,13 +25,13 @@
 
 | Package | Role | Technology |
 |---|---|---|
-| `@boardroom/openclaw` | Orchestration OS — proxy, coordinator, workflow | Node.js 20, TypeScript 5.4 |
-| `@boardroom/nemoclaw` | Guardrails — validation, anomaly detection | NVIDIA NeMo Guardrails |
-| `@boardroom/core` | Shared types — Thread, Turn, Checkpoint, Provenance | TypeScript 5.4 |
-| `@boardroom/storage` | Data layer — persist, index, export | Node.js 20, TypeScript 5.4 |
-| `@boardroom/dashboard` | Web UI — AI Board Room hub | React 18, Vite 5, nginx |
-| `@boardroom/cli` | Terminal interface | Node.js 20, Commander.js |
-| `boardroom-vscode` | In-editor capture agent | VS Code Extension API 1.85+ |
+| `@basilica/openclaw` | Orchestration OS — proxy, coordinator, workflow | Node.js 20, TypeScript 5.4 |
+| `@basilica/nemoclaw` | Guardrails — validation, anomaly detection | NVIDIA NeMo Guardrails |
+| `@basilica/core` | Shared types — Thread, Turn, Checkpoint, Provenance | TypeScript 5.4 |
+| `@basilica/storage` | Data layer — persist, index, export | Node.js 20, TypeScript 5.4 |
+| `@basilica/dashboard` | Web UI — Basilica hub | React 18, Vite 5, nginx |
+| `@basilica/cli` | Terminal interface | Node.js 20, Commander.js |
+| `basilica-vscode` | In-editor capture agent | VS Code Extension API 1.85+ |
 
 ### 1.3 Data Layer
 
@@ -87,7 +87,7 @@ Response delivered to User
 User pastes / uploads transcript
     │
     ▼
-CLI `boardroom import` or Dashboard import UI
+CLI `basilica import` or Dashboard import UI
     │
     ▼
 Connector.import()          → parse transcript into Turns
@@ -142,7 +142,7 @@ Results displayed
 ### Flow E — Export Handoff
 
 ```
-User: `boardroom export <thread-id>`
+User: `basilica export <thread-id>`
     │
     ▼
 PostgresStore: fetch Thread + Turns + Checkpoints + Provenance
@@ -210,7 +210,7 @@ Dev Qdrant snapshot   → SCP → ST-GABRIEL Qdrant restore
 ```mermaid
 sequenceDiagram
     actor User
-    participant UI as AI Board Room<br/>Interface<br/>(Dashboard / VS Code / CLI)
+    participant UI as Basilica<br/>Interface<br/>(Dashboard / VS Code / CLI)
     participant Proxy as OpenClaw<br/>MessageProxy
     participant Coord as AgentCoordinator
     participant Conn as Connector<br/>(Claude / Copilot)
@@ -265,14 +265,14 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor User
-    participant CLI as boardroom CLI
+    participant CLI as basilica CLI
     participant Conn as Connector
     participant WF as WorkflowEngine
     participant NC as NemoClaw
     participant PG as PostgreSQL
     participant QD as Qdrant
 
-    User->>CLI: boardroom import <file> --platform claude
+    User->>CLI: basilica import <file> --platform claude
     CLI->>Conn: import(transcript, options)
     Conn->>Conn: parse transcript<br/>into Turn[]
 
@@ -296,14 +296,14 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor User
-    participant CLI as boardroom CLI<br/>or VS Code Ext
+    participant CLI as basilica CLI<br/>or VS Code Ext
     participant WF as WorkflowEngine
     participant AI as AI Platform
     participant NC as NemoClaw
     participant PG as PostgreSQL
     participant DB as Dashboard
 
-    User->>CLI: boardroom checkpoint <thread-id>
+    User->>CLI: basilica checkpoint <thread-id>
     CLI->>WF: triggerCheckpoint(thread)
 
     WF->>AI: "Describe your current voice, key decisions,<br/>open questions, behavioral characteristics"
@@ -327,11 +327,11 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor User
-    participant CLI as boardroom CLI<br/>or Dashboard
+    participant CLI as basilica CLI<br/>or Dashboard
     participant QD as Qdrant
     participant PG as PostgreSQL
 
-    User->>CLI: boardroom search "Acuitas formation on truth"
+    User->>CLI: basilica search "Acuitas formation on truth"
     CLI->>QD: search(query, limit=10)
     QD->>QD: embed query vector<br/>cosine similarity search
     QD-->>CLI: ranked Thread IDs + scores
@@ -351,11 +351,11 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     actor User
-    participant CLI as boardroom CLI
+    participant CLI as basilica CLI
     participant PG as PostgreSQL
     participant ME as MarkdownExporter
 
-    User->>CLI: boardroom export <thread-id> --format md
+    User->>CLI: basilica export <thread-id> --format md
     CLI->>PG: getThread(id)
     PG-->>CLI: Thread
     CLI->>PG: getCheckpoints(threadId)

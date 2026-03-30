@@ -1,4 +1,4 @@
-import type { Thread, Turn, TurnCapturedEvent } from "@boardroom/core";
+import type { Thread, Turn, TurnCapturedEvent } from "@basilica/core";
 
 /**
  * WorkflowEngine — runs the capture pipeline on every conversation event:
@@ -7,7 +7,7 @@ import type { Thread, Turn, TurnCapturedEvent } from "@boardroom/core";
  *   3. Pass to NemoClaw for validation
  *   4. Store to sovereign storage
  *   5. Evaluate checkpoint rule (trigger if due)
- *   6. Emit event to AI Board Room dashboard
+ *   6. Emit event to Basilica dashboard
  */
 export class WorkflowEngine {
   private checkpointIntervalTurns: number;

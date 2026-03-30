@@ -1,4 +1,4 @@
-import type { Thread, ProvenanceChain } from "@boardroom/core";
+import type { Thread, ProvenanceChain } from "@basilica/core";
 
 /** Exports threads in Bill's InstanceName.Handoff_Vx.x.md format */
 export class MarkdownExporter {

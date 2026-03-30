@@ -11,7 +11,7 @@ COPY packages/core ./packages/core
 COPY packages/openclaw ./packages/openclaw
 COPY packages/nemoclaw ./packages/nemoclaw
 COPY packages/storage ./packages/storage
-RUN npm run build -w @boardroom/core -w @boardroom/nemoclaw -w @boardroom/storage -w @boardroom/openclaw
+RUN npm run build -w @basilica/core -w @basilica/nemoclaw -w @basilica/storage -w @basilica/openclaw
 
 FROM node:20-alpine
 WORKDIR /app

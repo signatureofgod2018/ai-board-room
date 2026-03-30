@@ -6,7 +6,7 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
 
 const POSTGRES_URL =
-  process.env["POSTGRES_URL"] ?? "postgresql://boardroom:boardroom@localhost:5432/boardroom";
+  process.env["POSTGRES_URL"] ?? "postgresql://basilica:basilica@localhost:5432/basilica";
 
 describe("T0 — PostgreSQL Platform", () => {
   // TODO: import pg Client once storage package is built

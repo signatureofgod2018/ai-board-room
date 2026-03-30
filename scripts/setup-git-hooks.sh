@@ -20,7 +20,7 @@ info() { echo -e "${GREEN}[hooks]${NC} $*"; }
 PRE_PUSH="${HOOKS_DIR}/pre-push"
 cat > "${PRE_PUSH}" <<'HOOK'
 #!/usr/bin/env bash
-# AI Board Room — pre-push hook
+# Basilica — pre-push hook
 # Runs regression suite. Blocks push if any test fails.
 
 set -euo pipefail

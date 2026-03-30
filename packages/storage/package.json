@@ -1,5 +1,5 @@
 {
-  "name": "@boardroom/storage",
+  "name": "@basilica/storage",
   "version": "0.1.0",
   "description": "Sovereign storage layer — PostgreSQL, Qdrant, Markdown exports",
   "type": "module",
@@ -10,7 +10,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@boardroom/core": "*",
+    "@basilica/core": "*",
     "pg": "^8.11.0",
     "@qdrant/js-client-rest": "^1.9.0"
   },

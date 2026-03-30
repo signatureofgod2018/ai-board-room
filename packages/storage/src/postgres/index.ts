@@ -1,4 +1,4 @@
-import type { Thread, Turn, FormationCheckpoint, ProvenanceRecord } from "@boardroom/core";
+import type { Thread, Turn, FormationCheckpoint, ProvenanceRecord } from "@basilica/core";
 
 export class PostgresStore {
   async saveThread(_thread: Thread): Promise<void> {

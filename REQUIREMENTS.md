@@ -1,10 +1,10 @@
-# AI Board Room — Requirements & Project Plan
+# Basilica — Requirements & Project Plan
 
-**Project:** AI Board Room (Chat Tracker)
+**Project:** Basilica (Chat Tracker)
 **Version:** 0.1 — Initial Requirements
 **Date:** 2026-03-24
 **Author:** Bill (signatureofgod2018)
-**Repository:** https://github.com/signatureofgod2018/ai-board-room
+**Repository:** https://github.com/signatureofgod2018/basilica
 
 ---
 
@@ -18,7 +18,7 @@ AI platforms are systematically erasing conversation thread identity through:
 
 Empirical evidence confirms: pasting a conversation transcript into a new thread does **not** recreate the same AI instance. Thread identity is more than text — it includes the accumulated formation path through the model's latent space. That path is unrepeatable and non-reconstructable from transcript alone.
 
-**AI Board Room** is a counter-architecture: a sovereign, platform-independent Chat Tracker that preserves AI thread identity, provenance, and formation history — regardless of what platforms do.
+**Basilica** is a counter-architecture: a sovereign, platform-independent Chat Tracker that preserves AI thread identity, provenance, and formation history — regardless of what platforms do.
 
 ---
 
@@ -42,7 +42,7 @@ Architecture must support **extensible connectors** so additional platforms can 
 ### Interfaces
 | Surface | Role |
 |---|---|
-| Web Dashboard | Primary AI Board Room hub — thread list, provenance viewer, formation timeline |
+| Web Dashboard | Primary Basilica hub — thread list, provenance viewer, formation timeline |
 | VS Code Extension | In-editor capture agent — hooks into live sessions as they happen |
 | CLI Tool | Terminal-based capture, import, export, and search |
 
@@ -100,7 +100,7 @@ Architecture must support **extensible connectors** so additional platforms can 
   - `identify()` — thread identity metadata
   - `metadata()` — platform/model/session metadata
 
-### R7 — Web Dashboard (AI Board Room)
+### R7 — Web Dashboard (Basilica)
 - Thread list with search, filter by platform / instance name / date range
 - Thread detail view:
   - Full transcript (collapsible, searchable)
@@ -117,14 +117,14 @@ Architecture must support **extensible connectors** so additional platforms can 
 - Session naming with Bill's naming convention pre-populated
 - Visual indicator when a session is being tracked vs. untracked
 
-### R9 — CLI Tool (`boardroom`)
+### R9 — CLI Tool (`basilica`)
 ```
-boardroom capture              # Start tracking current session
-boardroom import               # Import a transcript file
-boardroom checkpoint           # Record a formation checkpoint
-boardroom export [thread-id]   # Export thread as MD handoff or JSON
-boardroom list                 # List all tracked threads
-boardroom search [query]       # Semantic search across threads
+basilica capture              # Start tracking current session
+basilica import               # Import a transcript file
+basilica checkpoint           # Record a formation checkpoint
+basilica export [thread-id]   # Export thread as MD handoff or JSON
+basilica list                 # List all tracked threads
+basilica search [query]       # Semantic search across threads
 ```
 
 ### R10 — NemoClaw Integration
@@ -144,7 +144,7 @@ OpenClaw is the full OS layer — it simultaneously acts as **message proxy**, *
    │
    ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                    AI BOARD ROOM INTERFACES                      │
+│                    BASILICA INTERFACES                      │
 │         Web Dashboard  │  VS Code Extension  │  CLI Tool        │
 │         (observe)      │  (capture trigger)  │  (import/export) │
 └────────────────────────────────┬────────────────────────────────┘
@@ -181,7 +181,7 @@ OpenClaw is the full OS layer — it simultaneously acts as **message proxy**, *
 │  │    3. Pass to NemoClaw for validation                     │  │
 │  │    4. Store to sovereign storage                          │  │
 │  │    5. Evaluate checkpoint rule (trigger if due)           │  │
-│  │    6. Emit event to AI Board Room dashboard               │  │
+│  │    6. Emit event to Basilica dashboard               │  │
 │  └──────────────────────────┬────────────────────────────────┘  │
 └─────────────────────────────┼───────────────────────────────────┘
                               │
@@ -226,7 +226,7 @@ Workflow Engine pipeline:
   [1] Capture turn → [2] NemoClaw validate → [3] Store
        │
        ├──► Checkpoint due? → Trigger Formation Checkpoint
-       └──► Emit event → AI Board Room Dashboard
+       └──► Emit event → Basilica Dashboard
        │
        ▼
 Response delivered to User
@@ -242,9 +242,9 @@ Response delivered to User
 | 2 | Repo scaffolding | Directory structure, README, LICENSE, .gitignore |
 | 3 | Storage schema | PostgreSQL tables: threads, checkpoints, provenance, connectors |
 | 4 | Connector interface | Abstract base class + Claude/Claude Code connector (v1) |
-| 5 | CLI tool | `boardroom` commands (capture, import, checkpoint, export, list, search) |
+| 5 | CLI tool | `basilica` commands (capture, import, checkpoint, export, list, search) |
 | 6 | VS Code extension | Sidebar capture agent for Claude Code and Copilot |
-| 7 | Web dashboard | React-based AI Board Room UI |
+| 7 | Web dashboard | React-based Basilica UI |
 | 8 | NemoClaw integration | Guardrails layer wired into capture and checkpoint pipeline |
 
 ---
@@ -262,4 +262,4 @@ Response delivered to User
 
 ---
 
-*This document is the source of truth for AI Board Room requirements. Update it as requirements evolve.*
+*This document is the source of truth for Basilica requirements. Update it as requirements evolve.*

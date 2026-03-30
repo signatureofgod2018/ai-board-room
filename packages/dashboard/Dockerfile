@@ -7,7 +7,7 @@ RUN npm ci
 COPY tsconfig.base.json ./
 COPY packages/core ./packages/core
 COPY packages/dashboard ./packages/dashboard
-RUN npm run build -w @boardroom/core -w @boardroom/dashboard
+RUN npm run build -w @basilica/core -w @basilica/dashboard
 
 FROM nginx:alpine
 COPY --from=builder /app/packages/dashboard/dist /usr/share/nginx/html

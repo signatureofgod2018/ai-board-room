@@ -1,20 +1,20 @@
 version: "3.9"
 
-# AI Board Room — Production Compose (ST-GABRIEL)
+# Basilica — Production Compose (ST-GABRIEL)
 # Deploy with: scripts/deploy.sh
 # Images are pulled from ghcr.io — built by GitHub Actions CI
 
 services:
   postgres:
     image: postgres:16
-    container_name: boardroom-postgres
+    container_name: basilica-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: boardroom
+      POSTGRES_DB: basilica
     volumes:
-      - boardroom-postgres-data:/var/lib/postgresql/data
+      - basilica-postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 10s
@@ -23,10 +23,10 @@ services:
 
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: boardroom-qdrant
+    container_name: basilica-qdrant
     restart: unless-stopped
     volumes:
-      - boardroom-qdrant-data:/qdrant/storage
+      - basilica-qdrant-data:/qdrant/storage
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:6333/healthz || exit 1"]
       interval: 10s
@@ -34,8 +34,8 @@ services:
       retries: 5
 
   openclaw:
-    image: ghcr.io/signatureofgod2018/ai-board-room/openclaw:latest
-    container_name: boardroom-openclaw
+    image: ghcr.io/signatureofgod2018/basilica/openclaw:latest
+    container_name: basilica-openclaw
     restart: unless-stopped
     depends_on:
       postgres:
@@ -43,7 +43,7 @@ services:
       qdrant:
         condition: service_healthy
     environment:
-      POSTGRES_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/boardroom
+      POSTGRES_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/basilica
       QDRANT_URL: http://qdrant:6333
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       GITHUB_TOKEN: ${GITHUB_TOKEN}
@@ -52,8 +52,8 @@ services:
       - "4000:4000"
 
   dashboard:
-    image: ghcr.io/signatureofgod2018/ai-board-room/dashboard:latest
-    container_name: boardroom-dashboard
+    image: ghcr.io/signatureofgod2018/basilica/dashboard:latest
+    container_name: basilica-dashboard
     restart: unless-stopped
     depends_on:
       - openclaw
@@ -61,5 +61,5 @@ services:
       - "3000:80"
 
 volumes:
-  boardroom-postgres-data:
-  boardroom-qdrant-data:
+  basilica-postgres-data:
+  basilica-qdrant-data:

@@ -1,5 +1,5 @@
 import { BaseConnector } from "../base/connector.js";
-import type { Thread, ThreadMetadata, ConnectorMetadata, CaptureOptions, ImportOptions } from "@boardroom/core";
+import type { Thread, ThreadMetadata, ConnectorMetadata, CaptureOptions, ImportOptions } from "@basilica/core";
 
 /** Connector for VS Code Copilot chat sessions */
 export class CopilotConnector extends BaseConnector {

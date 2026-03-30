@@ -1,4 +1,4 @@
--- AI Board Room — Initial Schema
+-- Basilica — Initial Schema
 -- Migration 001: Core tables
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

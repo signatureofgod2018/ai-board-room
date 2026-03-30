@@ -2,11 +2,11 @@ import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
-    vscode.commands.registerCommand("boardroom.startCapture", () => {
-      vscode.window.showInformationMessage("Board Room: startCapture — not yet implemented");
+    vscode.commands.registerCommand("basilica.startCapture", () => {
+      vscode.window.showInformationMessage("Basilica: startCapture — not yet implemented");
     }),
-    vscode.commands.registerCommand("boardroom.recordCheckpoint", () => {
-      vscode.window.showInformationMessage("Board Room: recordCheckpoint — not yet implemented");
+    vscode.commands.registerCommand("basilica.recordCheckpoint", () => {
+      vscode.window.showInformationMessage("Basilica: recordCheckpoint — not yet implemented");
     })
   );
 }

@@ -25,17 +25,17 @@ describe("T0 — Environment Prerequisites", () => {
     expect(process.env["QDRANT_URL"], "Set QDRANT_URL in .env").toBeTruthy();
   });
 
-  it("@boardroom/core is built (dist exists)", () => {
+  it("@basilica/core is built (dist exists)", () => {
     const distPath = join(process.cwd(), "packages/core/dist/index.js");
     expect(existsSync(distPath), `Run 'npm run build' first — missing ${distPath}`).toBe(true);
   });
 
-  it("@boardroom/openclaw is built (dist exists)", () => {
+  it("@basilica/openclaw is built (dist exists)", () => {
     const distPath = join(process.cwd(), "packages/openclaw/dist/index.js");
     expect(existsSync(distPath), `Run 'npm run build' first — missing ${distPath}`).toBe(true);
   });
 
-  it("@boardroom/storage is built (dist exists)", () => {
+  it("@basilica/storage is built (dist exists)", () => {
     const distPath = join(process.cwd(), "packages/storage/dist/index.js");
     expect(existsSync(distPath), `Run 'npm run build' first — missing ${distPath}`).toBe(true);
   });

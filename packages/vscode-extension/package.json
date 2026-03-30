@@ -1,6 +1,6 @@
 {
-  "name": "boardroom-vscode",
-  "displayName": "AI Board Room",
+  "name": "basilica-vscode",
+  "displayName": "Basilica",
   "description": "Track and preserve AI thread identity inside VS Code",
   "version": "0.1.0",
   "engines": {
@@ -13,28 +13,28 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "boardroom",
-          "title": "AI Board Room",
+          "id": "basilica",
+          "title": "Basilica",
           "icon": "resources/icon.svg"
         }
       ]
     },
     "views": {
-      "boardroom": [
+      "basilica": [
         {
-          "id": "boardroom.sessions",
+          "id": "basilica.sessions",
           "name": "Tracked Sessions"
         }
       ]
     },
     "commands": [
       {
-        "command": "boardroom.startCapture",
-        "title": "Board Room: Start Capturing Session"
+        "command": "basilica.startCapture",
+        "title": "Basilica: Start Capturing Session"
       },
       {
-        "command": "boardroom.recordCheckpoint",
-        "title": "Board Room: Record Formation Checkpoint"
+        "command": "basilica.recordCheckpoint",
+        "title": "Basilica: Record Formation Checkpoint"
       }
     ]
   },
@@ -43,8 +43,8 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@boardroom/core": "*",
-    "@boardroom/openclaw": "*"
+    "@basilica/core": "*",
+    "@basilica/openclaw": "*"
   },
   "devDependencies": {
     "typescript": "^5.4.0",

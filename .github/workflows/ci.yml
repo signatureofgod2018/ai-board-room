@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ghcr.io/${{ github.repository_owner }}/ai-board-room
+  IMAGE_PREFIX: ghcr.io/${{ github.repository_owner }}/basilica
 
 jobs:
   build-and-test:
@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_USER: boardroom
-          POSTGRES_PASSWORD: boardroom
-          POSTGRES_DB: boardroom_test
+          POSTGRES_USER: basilica
+          POSTGRES_PASSWORD: basilica
+          POSTGRES_DB: basilica_test
         ports:
           - 5432:5432
         options: >-
@@ -36,8 +36,8 @@ jobs:
           - 6333:6333
 
     env:
-      POSTGRES_URL: postgresql://boardroom:boardroom@localhost:5432/boardroom
-      POSTGRES_TEST_URL: postgresql://boardroom:boardroom@localhost:5432/boardroom_test
+      POSTGRES_URL: postgresql://basilica:basilica@localhost:5432/basilica
+      POSTGRES_TEST_URL: postgresql://basilica:basilica@localhost:5432/basilica_test
       QDRANT_URL: http://localhost:6333
 
     steps:

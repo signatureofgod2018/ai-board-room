@@ -1,7 +1,7 @@
 {
-  "name": "@boardroom/dashboard",
+  "name": "@basilica/dashboard",
   "version": "0.1.0",
-  "description": "AI Board Room — Web Dashboard",
+  "description": "Basilica — Web Dashboard",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@boardroom/core": "*",
+    "@basilica/core": "*",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

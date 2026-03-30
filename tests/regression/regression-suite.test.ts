@@ -1,7 +1,7 @@
 /**
  * T3 — Regression Suite
  * Chains all P0/P1 use cases in a single stateful run.
- * Simulates a complete AI Board Room session from start to finish.
+ * Simulates a complete Basilica session from start to finish.
  *
  * Run:   npm run test:regression
  * Hook:  automatically run by .husky/pre-push

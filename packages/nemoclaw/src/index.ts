@@ -1,4 +1,4 @@
-import type { Turn, FormationCheckpoint, CheckpointValidation } from "@boardroom/core";
+import type { Turn, FormationCheckpoint, CheckpointValidation } from "@basilica/core";
 
 /**
  * NemoClaw — NeMo Guardrails integration.

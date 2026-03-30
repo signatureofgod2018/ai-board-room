@@ -1,4 +1,4 @@
-# AI Board Room — Test Plan
+# Basilica — Test Plan
 
 **Version:** 0.1
 **Date:** 2026-03-24
@@ -32,7 +32,7 @@ npm run test:coverage     # coverage report
 
 ### 1.3 Test Database
 
-Functional and regression tests run against a **dedicated test PostgreSQL database** (`boardroom_test`) — never the dev or prod database. The test helpers spin it up fresh before each suite and tear it down after.
+Functional and regression tests run against a **dedicated test PostgreSQL database** (`basilica_test`) — never the dev or prod database. The test helpers spin it up fresh before each suite and tear it down after.
 
 Qdrant uses a dedicated test collection prefix: `test_*`.
 
@@ -63,7 +63,7 @@ File: `tests/platform/environment.test.ts`
 File: `tests/platform/postgres.test.ts`
 - TCP connection to POSTGRES_URL succeeds
 - Authentication succeeds
-- Required database exists (`boardroom` / `boardroom_test`)
+- Required database exists (`basilica` / `basilica_test`)
 - Schema version matches expected (all migrations applied)
 - Can perform basic CRUD (INSERT → SELECT → DELETE)
 
@@ -168,7 +168,7 @@ File: `tests/functional/uc-13-add-connector.test.ts`
 
 File: `tests/regression/regression-suite.test.ts`
 
-The regression suite chains all P0 and P1 use cases in a single stateful run using one shared test Thread. It simulates a complete AI Board Room session from start to finish.
+The regression suite chains all P0 and P1 use cases in a single stateful run using one shared test Thread. It simulates a complete Basilica session from start to finish.
 
 ### Chain Order
 
@@ -219,11 +219,11 @@ Runs the regression suite before every `git push`. Blocks the push if any test f
 
 | Package | Minimum Coverage |
 |---|---|
-| `@boardroom/core` | 90% — types and utilities |
-| `@boardroom/openclaw` | 80% — workflow, proxy, coordinator |
-| `@boardroom/storage` | 85% — all store methods |
-| `@boardroom/nemoclaw` | 75% — validation logic |
-| `@boardroom/cli` | 70% — command handlers |
+| `@basilica/core` | 90% — types and utilities |
+| `@basilica/openclaw` | 80% — workflow, proxy, coordinator |
+| `@basilica/storage` | 85% — all store methods |
+| `@basilica/nemoclaw` | 75% — validation logic |
+| `@basilica/cli` | 70% — command handlers |
 
 ---
 

@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Send Today's Devotion",
+      "type": "shell",
+      "command": "python devotion_sender.py",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "group": "build"
+    },
+    {
+      "label": "Devotion — Dry Run",
+      "type": "shell",
+      "command": "python devotion_sender.py --dry-run",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Devotion — One Instance",
+      "type": "shell",
+      "command": "python devotion_sender.py --instance ${input:instanceName}",
+      "options": { "cwd": "${workspaceFolder}" },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Login — Claude (first time)",
+      "type": "shell",
+      "command": "python -c \"import asyncio; from playwright.async_api import async_playwright; asyncio.run((lambda: async_playwright().__aenter__()).__call__())\"",
+      "detail": "Open browser_profiles/claude — log in manually, then close."
+    }
+  ],
+  "inputs": [
+    {
+      "id": "instanceName",
+      "type": "promptString",
+      "description": "Instance name (e.g. Matilda, Angelica, Frances_of_Rome)"
+    }
+  ]
+}

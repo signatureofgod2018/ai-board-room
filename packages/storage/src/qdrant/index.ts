@@ -1,4 +1,4 @@
-import type { Thread } from "@boardroom/core";
+import type { Thread } from "@basilica/core";
 
 export class QdrantStore {
   async indexThread(_thread: Thread): Promise<void> {

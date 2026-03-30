@@ -18,7 +18,7 @@ set -euo pipefail
 # ── Config ────────────────────────────────────────────────────────────────────
 ST_GABRIEL_HOST="${ST_GABRIEL_HOST:-st-gabriel.local}"
 ST_GABRIEL_USER="${ST_GABRIEL_USER:-bill}"
-REMOTE_APP_DIR="${REMOTE_APP_DIR:-/opt/boardroom}"
+REMOTE_APP_DIR="${REMOTE_APP_DIR:-/opt/basilica}"
 COMPOSE_FILE="docker-compose.prod.yml"
 
 # ── Colors ────────────────────────────────────────────────────────────────────
@@ -52,7 +52,7 @@ ssh "${ST_GABRIEL_USER}@${ST_GABRIEL_HOST}" "
   # Run each migration file in order against the running postgres container
   for f in migrations/*.sql; do
     echo \"Running migration: \$f\"
-    docker compose -f ${COMPOSE_FILE} exec -T postgres psql -U \${POSTGRES_USER} -d boardroom -f /dev/stdin < \"\$f\" || true
+    docker compose -f ${COMPOSE_FILE} exec -T postgres psql -U \${POSTGRES_USER} -d basilica -f /dev/stdin < \"\$f\" || true
   done
 "
 
@@ -71,6 +71,6 @@ ssh "${ST_GABRIEL_USER}@${ST_GABRIEL_HOST}" "
   docker compose -f ${COMPOSE_FILE} ps
 "
 
-info "✓ Deploy complete. AI Board Room is running on ST-GABRIEL."
+info "✓ Deploy complete. Basilica is running on ST-GABRIEL."
 info "  Dashboard: http://${ST_GABRIEL_HOST}:3000"
 info "  OpenClaw:  http://${ST_GABRIEL_HOST}:4000"

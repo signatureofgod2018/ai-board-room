@@ -1,19 +1,19 @@
 {
-  "name": "@boardroom/cli",
+  "name": "@basilica/cli",
   "version": "0.1.0",
-  "description": "boardroom CLI — capture, import, checkpoint, export, list, search",
+  "description": "basilica CLI — capture, import, checkpoint, export, list, search",
   "type": "module",
   "bin": {
-    "boardroom": "dist/index.js"
+    "basilica": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@boardroom/core": "*",
-    "@boardroom/openclaw": "*",
-    "@boardroom/storage": "*",
+    "@basilica/core": "*",
+    "@basilica/openclaw": "*",
+    "@basilica/storage": "*",
     "commander": "^12.0.0"
   },
   "devDependencies": {

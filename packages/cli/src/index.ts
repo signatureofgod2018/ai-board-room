@@ -4,8 +4,8 @@ import { Command } from "commander";
 const program = new Command();
 
 program
-  .name("boardroom")
-  .description("AI Board Room — Chat Tracker CLI")
+  .name("basilica")
+  .description("Basilica — Chat Tracker CLI")
   .version("0.1.0");
 
 program
@@ -14,7 +14,7 @@ program
   .option("-n, --name <name>", "Instance name (e.g. Patrick)")
   .option("-p, --platform <platform>", "Platform: claude | copilot", "claude")
   .action(async (_opts) => {
-    throw new Error("boardroom capture — not yet implemented");
+    throw new Error("basilica capture — not yet implemented");
   });
 
 program
@@ -23,7 +23,7 @@ program
   .argument("<file>", "Path to transcript file")
   .option("-p, --platform <platform>", "Platform: claude | copilot")
   .action(async (_file, _opts) => {
-    throw new Error("boardroom import — not yet implemented");
+    throw new Error("basilica import — not yet implemented");
   });
 
 program
@@ -31,7 +31,7 @@ program
   .description("Record a formation checkpoint for a thread")
   .argument("<thread-id>", "Thread ID or slug")
   .action(async (_threadId) => {
-    throw new Error("boardroom checkpoint — not yet implemented");
+    throw new Error("basilica checkpoint — not yet implemented");
   });
 
 program
@@ -40,7 +40,7 @@ program
   .argument("<thread-id>", "Thread ID or slug")
   .option("-f, --format <format>", "Format: md | json", "md")
   .action(async (_threadId, _opts) => {
-    throw new Error("boardroom export — not yet implemented");
+    throw new Error("basilica export — not yet implemented");
   });
 
 program
@@ -48,7 +48,7 @@ program
   .description("List all tracked threads")
   .option("-p, --platform <platform>", "Filter by platform")
   .action(async (_opts) => {
-    throw new Error("boardroom list — not yet implemented");
+    throw new Error("basilica list — not yet implemented");
   });
 
 program
@@ -57,7 +57,7 @@ program
   .argument("<query>", "Search query")
   .option("-l, --limit <n>", "Max results", "10")
   .action(async (_query, _opts) => {
-    throw new Error("boardroom search — not yet implemented");
+    throw new Error("basilica search — not yet implemented");
   });
 
 program.parse();

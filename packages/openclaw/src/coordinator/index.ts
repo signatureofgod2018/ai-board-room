@@ -1,4 +1,4 @@
-import type { Connector, CaptureOptions, Platform } from "@boardroom/core";
+import type { Connector, CaptureOptions, Platform } from "@basilica/core";
 
 /**
  * AgentCoordinator — routes conversation traffic to the correct

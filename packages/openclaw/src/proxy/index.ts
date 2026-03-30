@@ -1,4 +1,4 @@
-import type { Turn, TurnCapturedEvent } from "@boardroom/core";
+import type { Turn, TurnCapturedEvent } from "@basilica/core";
 
 /**
  * MessageProxy — intercepts every conversation turn before and after

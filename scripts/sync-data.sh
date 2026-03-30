@@ -21,10 +21,10 @@ set -euo pipefail
 # ── Config ────────────────────────────────────────────────────────────────────
 ST_GABRIEL_HOST="${ST_GABRIEL_HOST:-st-gabriel.local}"
 ST_GABRIEL_USER="${ST_GABRIEL_USER:-bill}"
-REMOTE_APP_DIR="${REMOTE_APP_DIR:-/opt/boardroom}"
+REMOTE_APP_DIR="${REMOTE_APP_DIR:-/opt/basilica}"
 COMPOSE_FILE="docker-compose.prod.yml"
 LOCAL_COMPOSE_FILE="docker-compose.yml"
-SYNC_DIR="/tmp/boardroom-sync"
+SYNC_DIR="/tmp/basilica-sync"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # ── Flags ─────────────────────────────────────────────────────────────────────
@@ -91,7 +91,7 @@ run_dst() {
 
 # ── Step 1: PostgreSQL dump ────────────────────────────────────────────────────
 info "Step 1/4 — Dumping PostgreSQL tables..."
-DUMP_FILE="${SYNC_DIR}/boardroom_${TIMESTAMP}.pgdump"
+DUMP_FILE="${SYNC_DIR}/basilica_${TIMESTAMP}.pgdump"
 
 TABLE_FLAGS=""
 for t in "${PG_TABLES[@]}"; do
@@ -103,12 +103,12 @@ if [ "$DRY_RUN" = true ]; then
 else
   if [ "$SRC_HOST" = "local" ]; then
     docker compose -f "${SRC_COMPOSE}" exec -T postgres \
-      pg_dump -U boardroom -d boardroom --data-only ${TABLE_FLAGS} \
+      pg_dump -U basilica -d basilica --data-only ${TABLE_FLAGS} \
       > "${DUMP_FILE}"
   else
     ssh "${SRC_HOST}" "
       docker compose -f ${SRC_COMPOSE} exec -T postgres \
-        pg_dump -U boardroom -d boardroom --data-only ${TABLE_FLAGS}
+        pg_dump -U basilica -d basilica --data-only ${TABLE_FLAGS}
     " > "${DUMP_FILE}"
   fi
   info "  Dump written: ${DUMP_FILE} ($(du -sh "${DUMP_FILE}" | cut -f1))"
@@ -123,7 +123,7 @@ else
     # Already local — nothing to transfer
     DST_DUMP="${DUMP_FILE}"
   else
-    DST_DUMP="/tmp/boardroom_${TIMESTAMP}.pgdump"
+    DST_DUMP="/tmp/basilica_${TIMESTAMP}.pgdump"
     scp "${DUMP_FILE}" "${DST_HOST}:${DST_DUMP}"
     info "  Transferred to ${DST_HOST}:${DST_DUMP}"
   fi
@@ -136,11 +136,11 @@ if [ "$DRY_RUN" = true ]; then
 else
   if [ "$DST_HOST" = "local" ]; then
     docker compose -f "${LOCAL_COMPOSE_FILE}" exec -T postgres \
-      psql -U boardroom -d boardroom < "${DUMP_FILE}"
+      psql -U basilica -d basilica < "${DUMP_FILE}"
   else
     ssh "${DST_HOST}" "
       cat ${DST_DUMP} | docker compose -f ${REMOTE_APP_DIR}/${COMPOSE_FILE} exec -T postgres \
-        psql -U boardroom -d boardroom
+        psql -U basilica -d basilica
       rm ${DST_DUMP}
     "
   fi

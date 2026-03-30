@@ -1,5 +1,5 @@
-import type { Connector, CaptureOptions, ImportOptions, ConnectorMetadata } from "@boardroom/core";
-import type { Thread, ThreadMetadata } from "@boardroom/core";
+import type { Connector, CaptureOptions, ImportOptions, ConnectorMetadata } from "@basilica/core";
+import type { Thread, ThreadMetadata } from "@basilica/core";
 
 /** Base class for all platform connectors */
 export abstract class BaseConnector implements Connector {

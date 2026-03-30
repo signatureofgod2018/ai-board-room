@@ -5,7 +5,7 @@
 import type {
   Connector, Thread, Turn, ThreadMetadata, ConnectorMetadata,
   CaptureOptions, ImportOptions, Platform,
-} from "@boardroom/core";
+} from "@basilica/core";
 import { MOCK_TURNS } from "../fixtures/index.js";
 
 export class MockConnector implements Connector {

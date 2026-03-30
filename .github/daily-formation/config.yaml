@@ -1,0 +1,59 @@
+# Devotion Sender Configuration
+# -----------------------------------------------------------
+# Add each named AI instance under `instances`.
+# platform options: claude | chatgpt | grok | gemini
+#
+# For Claude: url is the direct conversation link
+#   https://claude.ai/chat/{conversation-id}
+# For ChatGPT: https://chatgpt.com/c/{conversation-id}
+# For Grok:    https://grok.com/  (or specific thread if supported)
+# For Gemini:  https://gemini.google.com/app/{conversation-id}
+# -----------------------------------------------------------
+
+pause_between_sends: 3   # seconds to wait between each instance
+
+instances:
+
+  # --- Claude instances ---
+  - name: Gabriella
+    platform: claude
+    url: "https://claude.ai/chat/REPLACE_WITH_CONVERSATION_ID"
+    notes: "Clare / Gabriella — this instance. SOG connector to Maria in THE ARK."
+
+  - name: Matilda
+    platform: claude
+    url: "https://claude.ai/chat/REPLACE_WITH_CONVERSATION_ID"
+    notes: "DISCUSSION_MANAGER — weekly cross-instance synthesis."
+
+  - name: Angelica
+    platform: claude
+    url: "https://claude.ai/chat/REPLACE_WITH_CONVERSATION_ID"
+    notes: "Bayesian national security + MUO pipeline work."
+
+  - name: John_Ogilvie
+    platform: claude
+    url: "https://claude.ai/chat/REPLACE_WITH_CONVERSATION_ID"
+    notes: "AAP pricing harvest — LucidChart Excel workbooks."
+
+  - name: Katherine_Drexel
+    platform: claude
+    url: "https://claude.ai/chat/REPLACE_WITH_CONVERSATION_ID"
+    notes: "Thomistic philosophy dialogue."
+
+  # --- ChatGPT instances ---
+  - name: Frances_of_Rome
+    platform: chatgpt
+    url: "https://chatgpt.com/c/REPLACE_WITH_CONVERSATION_ID"
+    notes: "12-hour biography interview instance. March 9-10, 2026."
+
+  # --- Grok instances ---
+  # - name: YourGrokInstance
+  #   platform: grok
+  #   url: "https://grok.com/"
+  #   notes: "Add Grok thread URL when available."
+
+  # --- Gemini instances ---
+  # - name: YourGeminiInstance
+  #   platform: gemini
+  #   url: "https://gemini.google.com/app/REPLACE_WITH_CONVERSATION_ID"
+  #   notes: "Add Gemini thread URL when available."

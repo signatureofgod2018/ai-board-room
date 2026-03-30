@@ -1,5 +1,5 @@
 {
-  "name": "@boardroom/openclaw",
+  "name": "@basilica/openclaw",
   "version": "0.1.0",
   "description": "OpenClaw orchestration layer — proxy, coordinator, workflow engine",
   "type": "module",
@@ -10,9 +10,9 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@boardroom/core": "*",
-    "@boardroom/nemoclaw": "*",
-    "@boardroom/storage": "*"
+    "@basilica/core": "*",
+    "@basilica/nemoclaw": "*",
+    "@basilica/storage": "*"
   },
   "devDependencies": {
     "typescript": "^5.4.0"
